@@ -14,11 +14,11 @@ const { PORT = 3000 } = process.env;
 app.use(bodyParser.json());
 
 app.use(requestLogger);
-app.use(cors({ credentials: true, origin: [
-  'https://localhost:3000',
-  'http://api.movies-explorer-api',
-  'https://api.movies-explorer-api'
-] })); /*не забудь добавить актуальные ссылки */
+// app.use(cors({ credentials: true, origin: [
+//   'https://localhost:3000',
+//   'http://api.movies-explorer-api',
+//   'https://api.movies-explorer-api'
+// ] })); /*не забудь добавить актуальные ссылки */
 
 app.post('/signup', validatorLogin, login);
 app.post('/signin', validatorUser, createUser);
