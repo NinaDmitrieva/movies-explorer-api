@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const { errors } = require('celebrate');
 const NotFoundError = require('./errors/NotFoundError');
 const { login, createUser } = require('./controllers/users');
 const auth = require('./middlewares/auth');
@@ -37,4 +38,7 @@ app.use(errorLogger); // подключаем логгер ошибок
 
 app.use(errors());
 app.use(handleErrors);
-app.listen(PORT);
+
+app.listen(PORT, () => {
+  console.log(`сервер запущен ${PORT}`);
+});
