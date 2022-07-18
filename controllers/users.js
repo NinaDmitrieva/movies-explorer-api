@@ -6,7 +6,7 @@ const AuthError = require('../errors/AuthError');
 const BadReqError = require('../errors/BadReqError');
 const ConflictError = require('../errors/ConflictError');
 
-const { NODE_ENV, JWT_SECRET } = process.env; /*!!!*/
+const { NODE_ENV, JWT_SECRET } = process.env; /*! !! */
 
 module.exports.getUserInfo = (req, res, next) => {
   User.findById(req.user._id)

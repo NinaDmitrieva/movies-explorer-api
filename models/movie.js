@@ -9,7 +9,7 @@ const movieSchema = new mongoose.Schema({
   director: {
     type: String,
     required: [true, 'Укажите режиссёра фильма'],
-},
+  },
   duration: {
     type: Number,
     required: [true, 'Укажите продолжительность фильма'],
@@ -17,11 +17,11 @@ const movieSchema = new mongoose.Schema({
   year: {
     type: String,
     required: [true, 'Укажите год выпуска фильма'],
-},
+  },
   description: {
     type: String,
     required: [true, 'Укажите описание фильма'],
-},
+  },
   image: {
     type: String,
     required: [true, 'Укажите ссылку на постер фильма'],
@@ -42,10 +42,10 @@ const movieSchema = new mongoose.Schema({
     ref: 'user',
     required: true,
   },
-  movieId: {   /*id фильма, который содержится в ответе сервиса MoviesExplorer.Обязательное поле.*/
-  type: Number,
-  required: true,
-},
+  movieId: { /* id фильма, который содержится в ответе сервиса MoviesExplorer.Обязательное поле. */
+    type: Number,
+    required: true,
+  },
   nameRU: {
     type: String,
     required: [true, 'Укажите название фильма на русском языке'],
