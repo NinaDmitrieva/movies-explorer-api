@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
+const helmet = require('helmet');
 const NotFoundError = require('./errors/NotFoundError');
 const { login, createUser } = require('./controllers/users');
 const auth = require('./middlewares/auth');
@@ -13,6 +14,7 @@ const app = express();
 const { PORT = 3000 } = process.env;
 
 app.use(bodyParser.json());
+app.use(helmet());
 
 app.use(requestLogger);
 // app.use(cors({ credentials: true, origin: [
@@ -39,6 +41,4 @@ app.use(errorLogger); // подключаем логгер ошибок
 app.use(errors());
 app.use(handleErrors);
 
-app.listen(PORT, () => {
-  console.log(`сервер запущен ${PORT}`);
-});
+app.listen(PORT);
