@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
 const helmet = require('helmet');
+const cors = require('cors');
 const NotFoundError = require('./errors/NotFoundError');
 const { login, createUser } = require('./controllers/users');
 const auth = require('./middlewares/auth');
@@ -19,11 +20,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(helmet());
 app.use(requestLogger);
-// app.use(cors({ credentials: true, origin: [
-//   'https://localhost:3000',
-//   'http://api.movies-explorer-api',
-//   'https://api.movies-explorer-api'
-// ] })); /*не забудь добавить актуальные ссылки */
+
+app.use(cors({ credentials: true, origin: ['https://localhost:3000', 'http://api.getmovies.nomoredomains.xyz', 'https://api.getmovies.nomoredomains.xyz'] }));
 
 app.post('/signup', validatorLogin, login);
 app.post('/signin', validatorUser, createUser);
