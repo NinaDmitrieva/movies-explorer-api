@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(helmet());
 app.use(requestLogger);
 
-app.use(cors({ credentials: true, origin: ['https://localhost:3000', 'http://api.getmovies.nomoredomains.xyz', 'https://api.getmovies.nomoredomains.xyz'] }));
+app.use(cors({ credentials: true, origin: ['https://localhost:3000', 'http://localhost:3000', 'http://api.getmovies.nomoredomains.xyz', 'https://api.getmovies.nomoredomains.xyz'] }));
 
 app.post('/signup', validatorLogin, login);
 app.post('/signin', validatorUser, createUser);
