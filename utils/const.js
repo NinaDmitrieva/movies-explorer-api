@@ -6,5 +6,10 @@ const validateURL = (value) => {
   }
   return value;
 };
-
-module.exports = { Reg, JWT, validateURL };
+const mongodbURL = 'mongodb://localhost:27017/bitfilmsdb';
+module.exports = {
+  Reg,
+  JWT,
+  validateURL,
+  mongodbURL,
+};
