@@ -6,7 +6,7 @@ const AuthError = require('../errors/AuthError');
 const BadReqError = require('../errors/BadReqError');
 const ConflictError = require('../errors/ConflictError');
 
-const { NODE_ENV, JWT_SECRET } = process.env;
+const { NODE_ENV, JWT_SECRET } = require('../utils/config');
 
 module.exports.getUserInfo = (req, res, next) => {
   User.findById(req.user._id)
@@ -32,9 +32,10 @@ module.exports.updateUser = (req, res, next) => {
     })
     .catch((err) => {
       if (err.name === 'ValidationError' || err.name === 'CastError') {
-        throw new BadReqError('Введены некорректные данные');
+        next(new ConflictError('Введены некорректные данные'));
+      } else {
+        next(err);
       }
-      next(err);
     });
 };
 
@@ -80,11 +81,11 @@ module.exports.createUser = (req, res, next) => {
           .catch((err) => {
             if (err.name === 'ValidationError') {
               next(new BadReqError('Введены некорректные данные'));
-            }
-            if (err.code === 11000) {
+            } else if (err.code === 11000) {
               next(new ConflictError('Такой пользователь уже существует)'));
+            } else {
+              next(err);
             }
-            next(err);
           });
       }
     })

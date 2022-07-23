@@ -4,7 +4,8 @@ const NotFoundError = require('../errors/NotFoundError');
 const ForbiddenError = require('../errors/ForbiddenError');
 
 module.exports.getMovies = (req, res, next) => {
-  Movie.find({})
+  const owner = req.user._id;
+  Movie.find({ owner })
     .then((movie) => res.send(movie))
     .catch((err) => {
       next(err);
@@ -19,7 +20,7 @@ module.exports.createMovies = (req, res, next) => {
     year,
     description,
     image,
-    trailer,
+    trailerLink,
     nameRU,
     nameEN,
     thumbnail,
@@ -33,7 +34,7 @@ module.exports.createMovies = (req, res, next) => {
     year,
     description,
     image,
-    trailer,
+    trailerLink,
     nameRU,
     nameEN,
     thumbnail,
@@ -44,8 +45,9 @@ module.exports.createMovies = (req, res, next) => {
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new BadReqError('Введены некорректные данные'));
+      } else {
+        next(err);
       }
-      next(err);
     });
 };
 
@@ -61,14 +63,15 @@ module.exports.deleteMovies = (req, res, next) => {
       } else {
         Movie.findByIdAndRemove(movieId)
           .then(() => {
-            res.send({ messege: 'Фильм удален' });
+            res.send({ message: 'Фильм удален' });
           });
       }
     })
     .catch((err) => {
       if (err.name === 'ValidationError' || err.name === 'CastError') {
-        throw new BadReqError('Введены некорректные данные');
+        next(new BadReqError('Введены некорректные данные'));
+      } else {
+        next(err);
       }
-      next(err);
     });
 };

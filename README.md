@@ -7,5 +7,5 @@
 **npm run start** — запускает сервер
 **npm run dev** — запускает сервер с hot-reload
 
-Ссылки
-`API сервиса`[Ссылка на страницу](https://api.getmovies.nomoredomains.xyz/)
+##Ссылки
+[API сервиса](http://api.getmovies.nomoredomains.xyz/)
