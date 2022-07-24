@@ -32,7 +32,10 @@ module.exports.updateUser = (req, res, next) => {
     })
     .catch((err) => {
       if (err.name === 'ValidationError' || err.name === 'CastError') {
-        next(new ConflictError('Введены некорректные данные'));
+        next(new BadReqError('Введены некорректные данные'));
+      }
+      if (err.code === 11000) {
+        next(new ConflictError('Этот email занят'));
       } else {
         next(err);
       }

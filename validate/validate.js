@@ -25,16 +25,16 @@ module.exports.validatorUPDATEUser = celebrate({
 
 module.exports.validatorPOSTMovies = celebrate({
   body: Joi.object().keys({
-    country: Joi.string(),
-    director: Joi.string(),
+    country: Joi.string().required(),
+    director: Joi.string().required(),
     duration: Joi.number().required(),
     year: Joi.number().required(),
-    description: Joi.string(),
-    image: Joi.string().pattern(Reg),
-    trailerLink: Joi.string().pattern(Reg),
-    nameRU: Joi.string(),
-    nameEN: Joi.string(),
-    thumbnail: Joi.string().pattern(Reg),
+    description: Joi.string().required(),
+    image: Joi.string().required().pattern(Reg),
+    trailerLink: Joi.string().required().pattern(Reg),
+    nameRU: Joi.string().required(),
+    nameEN: Joi.string().required(),
+    thumbnail: Joi.string().required().pattern(Reg),
     movieId: Joi.number().required(),
   }),
 });
